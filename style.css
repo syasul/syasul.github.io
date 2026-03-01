@@ -25,6 +25,10 @@ nav .nav-links { list-style: none; display: flex; gap: 30px; }
 nav .nav-links a { text-decoration: none; color: var(--text-main); font-size: 0.95rem; font-weight: 500; transition: 0.3s; }
 nav .nav-links a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
 
+/* Hamburger Menu Base Styling */
+.menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; }
+.menu-toggle .bar { width: 25px; height: 3px; background-color: var(--text-main); border-radius: 3px; transition: all 0.3s ease-in-out; }
+
 /* Glass Card Umum */
 .glass-card { background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 30px; transition: all 0.4s ease; }
 .glass-card:hover { border-color: rgba(0, 242, 254, 0.3); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 242, 254, 0.1); transform: translateY(-5px); }
@@ -32,7 +36,7 @@ nav .nav-links a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0
 /* Gradient Text */
 .gradient-text { background: linear-gradient(to right, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* ---------------- HERO SECTION DENGAN FOTO PROFIL ---------------- */
+/* ---------------- HERO SECTION ---------------- */
 .hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 8% 0; }
 .hero-wrapper { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; margin: 0 auto; gap: 40px; }
 .hero-content { flex: 1; }
@@ -46,15 +50,6 @@ nav .nav-links a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0
 .img-box { position: relative; width: 350px; height: 350px; border-radius: 50%; padding: 10px; background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan)); box-shadow: 0 0 30px rgba(0, 242, 254, 0.3); animation: float 6s ease-in-out infinite; }
 .img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 5px solid var(--bg-main); background-color: var(--bg-main); }
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
-
-/* Responsiveness untuk Hero (Mobile) */
-@media (max-width: 900px) {
-    .hero-wrapper { flex-direction: column-reverse; text-align: center; margin-top: 50px; }
-    .hero-buttons { justify-content: center; }
-    .hero h1 { font-size: 2.8rem; }
-    .img-box { width: 280px; height: 280px; margin-bottom: 20px; }
-    nav .nav-links { display: none; /* Sembunyikan menu di mobile sementara */ }
-}
 
 /* Buttons */
 .btn { padding: 12px 30px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; font-size: 1rem; }
@@ -107,3 +102,66 @@ section { padding: 120px 8% 20px; }
 .floating-wa:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(37, 211, 102, 0.7); }
 
 footer { text-align: center; padding: 30px; background: rgba(10, 14, 23, 0.9); border-top: 1px solid var(--glass-border); color: var(--text-muted); font-size: 0.9rem; }
+
+
+/* ========================================================
+   RESPONSIVE DESIGN & MEDIA QUERIES (DIGABUNGKAN)
+   ======================================================== */
+
+/* Tablet & Mobile Besar (Max Width: 900px) */
+@media (max-width: 900px) {
+    /* Tampilkan Hamburger */
+    .menu-toggle { display: flex; }
+    
+    /* Layout Mobile Menu */
+    nav .nav-links {
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background: rgba(10, 14, 23, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease-in-out;
+        border-top: 1px solid var(--glass-border);
+    }
+
+    nav .nav-links.active { left: 0; }
+    nav .nav-links li { margin: 20px 0; }
+    nav .nav-links a { font-size: 1.2rem; }
+
+    /* Animasi Silang (X) */
+    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Hero Responsive */
+    .hero-wrapper { flex-direction: column-reverse; text-align: center; margin-top: 50px; }
+    .hero-buttons { justify-content: center; }
+    .hero h1 { font-size: 2.8rem; }
+    .img-box { width: 280px; height: 280px; margin-bottom: 20px; }
+    
+    /* Penyesuaian Umum Section */
+    section { padding: 100px 5% 20px; }
+    .section-title { font-size: 2rem; }
+}
+
+/* Mobile Kecil (Max Width: 600px) */
+@media (max-width: 600px) {
+    .hero { padding: 80px 5% 0; }
+    .hero h1 { font-size: 2.2rem; }
+    .role { font-size: 1.1rem; }
+    .hero-buttons { flex-direction: column; gap: 15px; }
+    .btn { width: 100%; justify-content: center; }
+    .img-box { width: 220px; height: 220px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .timeline { padding-left: 20px; margin-left: 10px; }
+    .timeline-dot { left: -29px; width: 14px; height: 14px; }
+    .skills-container { gap: 10px; }
+    .skill-pill { padding: 10px 15px; font-size: 0.85rem; }
+    .contact-item { width: 100%; word-break: break-word; }
+}

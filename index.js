@@ -23,6 +23,24 @@ document.addEventListener('DOMContentLoaded', function() {
         easing: 'ease-out-cubic'
     });
 
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-links li a');
+
+    // Toggle menu saat ikon hamburger diklik
+    mobileMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Tutup menu otomatis saat salah satu link diklik
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            mobileMenu.classList.remove('is-active');
+            navLinks.classList.remove('active');
+        });
+    });
+
     // Efek blur navbar saat di-scroll
     const nav = document.querySelector('nav');
     window.addEventListener('scroll', () => {
